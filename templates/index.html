@@ -25,7 +25,6 @@
   <body>
     <div id="original"></div>
     <input type="button" value="Take Snapshot" onClick="take_snapshot()" />
-    <button id="send" onclick="send()">send</button>
     <div id="results"></div>
 
     <div class="video">
@@ -60,29 +59,22 @@
         console.log("connected");
       });
 
-      const video = document
-        .querySelector("#original")
-        .getElementsByTagName("video")[0];
-      video.width = 500;
-      video.height = 380;
+      const FPS = 100;
+      document
+        .getElementById("original")
+        .getElementsByTagName("video")[0].onplaying = function () {
+        setInterval(() => {
+          var data = Webcam.snap(function (img) {
+            var img_base64 = img.replace(/^data\:image\/\w+\;base64\,/, "");
+            socket.emit("image", img_base64);
+          });
+        }, 10000 / FPS);
 
-      let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
-      let dst = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-      let cap = new cv.VideoCapture(video);
-      const FPS = 60;
-      setInterval(() => {
-        var data = Webcam.snap(function (img) {
-          var img_base64 = img.replace(/^data\:image\/\w+\;base64\,/, "");
-          // var formData = new FormData();
-          // formData.append("img", img_base64);
-          socket.emit("image", img_base64);
+        socket.on("response_back", function (image) {
+          const image_id = document.getElementById("image");
+          image_id.src = image;
         });
-      }, 10000 / FPS);
-
-      socket.on("response_back", function (image) {
-        const image_id = document.getElementById("image");
-        image_id.src = image;
-      });
+      };
     </script>
   </body>
 </html>

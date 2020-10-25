@@ -7,7 +7,7 @@ from PIL import Image
 import cv2
 import numpy as np
 import imutils
-
+from videoStreaming import predictXception
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
@@ -16,7 +16,6 @@ socketio = SocketIO(app, cors_allowed_origins='*')
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 
 @socketio.on('image')
@@ -30,10 +29,11 @@ def image(data_image):
 
     ## converting RGB to BGR, as opencv standards
     frame = cv2.cvtColor(np.array(pimg), cv2.COLOR_RGB2BGR)
+    frame = predictXception(frame)
+    if frame is None:
+        emit('response_back', None)
+        return
 
-    # Process the image frame
-    frame = imutils.resize(frame, width=700)
-    frame = cv2.flip(frame, 1)
     imgencode = cv2.imencode('.jpg', frame)[1]
 
     # base64 encode
@@ -43,6 +43,7 @@ def image(data_image):
 
     # emit the frame back
     emit('response_back', stringData)
+
 
 if __name__ == '__main__':
     print("app is  running")
