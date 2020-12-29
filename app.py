@@ -8,6 +8,7 @@ import cv2
 import numpy as np
 import imutils
 from videoStreaming import predictXception
+import eventlet
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
@@ -48,4 +49,9 @@ def image(data_image):
 if __name__ == '__main__':
     print("app is  running")
     # socketio.run(app, host='0.0.0.0', port=3000)
-    socketio.run(app, host="0.0.0.0", debug=True,  keyfile="key.pem", certfile="cert.pem")
+    # socketio.run(app, host="0.0.0.0", debug=True,  keyfile="key.pem", certfile="cert.pem")
+    eventlet.wsgi.server(
+        eventlet.wrap_ssl(eventlet.listen(("localhost", 3000)),
+                          certfile='host.cert',
+                          keyfile='host.key',
+                          server_side=True), app)
