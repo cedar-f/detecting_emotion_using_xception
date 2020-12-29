@@ -50,8 +50,12 @@ if __name__ == '__main__':
     print("app is  running")
     # socketio.run(app, host='0.0.0.0', port=3000)
     # socketio.run(app, host="0.0.0.0", debug=True,  keyfile="key.pem", certfile="cert.pem")
+
+    # create certificate
+    # openssl req - newkey rsa: 2048 - new - nodes - x509 - days 3650 - keyout key.pem - out cert.pem
+
     eventlet.wsgi.server(
-        eventlet.wrap_ssl(eventlet.listen(("localhost", 3000)),
-                          certfile='host.cert',
-                          keyfile='host.key',
+        eventlet.wrap_ssl(eventlet.listen(("0.0.0.0", 3000)),
+                          certfile='cert.pem',
+                          keyfile='key.pem',
                           server_side=True), app)

@@ -39,8 +39,7 @@
         width: 500,
         height: 380,
         image_format: "jpeg",
-        jpeg_quality: 1080,
-        force_flash: true
+        jpeg_quality: 1080
       });
       Webcam.attach("#original");
 
@@ -54,7 +53,7 @@
       }
     </script>
     <script>
-      var socket = io.connect("http://localhost:3000");
+      var socket = io.connect("https://localhost:3000");
       socket.on("connect", function () {
         console.log("connected");
       });
