@@ -12,8 +12,8 @@ base_directory = 'img/'
 
 def upload_img(img_data, bucket='emtion-img-data', object_name=None):
     if object_name is None:
-        object_name = base_directory + str(datetime.datetime.now()) + get_random_string(4)
-
+        object_name = base_directory + str(datetime.datetime.now()) + get_random_string(4) + '.jpg'
+        object_name = object_name.replace(' ', '')
     s3_client = boto3.client('s3')
     try:
         buffer = io.BytesIO()
@@ -30,7 +30,3 @@ def get_random_string(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
     return result_str
-
-
-
-

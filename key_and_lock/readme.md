@@ -1,1 +1,1 @@
-put certificate ,key, and IAM aws s3 here
+put ssl certificate (cert.pem) ,key(key.pem) here

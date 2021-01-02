@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Facial Recognition APP</title>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<link
+			rel="shortcut icon"
+			href="/static/assets/img/icon.jpg"
+			type="image/x-icon"
+		/>
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<!-- <link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		/> -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+			integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="../static/assets/dist/assets/owl.carousel.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="../static/assets/dist/assets/owl.theme.default.min.css"
+		/>
+		<link rel="stylesheet" href="../static/assets/css/style.css" />
+	</head>
+
+	<body id="body-labeling" onload="load_page_labeling()">
+		<div class="container-fluid">
+			<header>
+				<div class="row">
+					<div class="col-sm">
+						<div class="default title-app">
+							<h1>Facial Recognition APP</h1>
+							<i class="fa fa-heart" aria-hidden="true">10k</i>
+							<i class="fa fa-share" aria-hidden="true">share</i>
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- <nav class="nav justify-content-center"> -->
+			<ul class="nav nav-tabs bg-info">
+				<li class="nav-item">
+					<a href="/" class="nav-link">Predict Using WebcamEasy</a>
+				</li>
+				<li class="nav-item">
+					<a id="load_labeling" href="/labeling" class="nav-link active"
+						>Labeling Data</a
+					>
+				</li>
+				<li class="nav-item">
+					<a href="/predict-by-webcamjs" class="nav-link"
+						>Predict Using WebcamJS</a
+					>
+				</li>
+			</ul>
+
+			<!-- ---------------------------- -->
+
+			<body>
+				<div class="row" id="new-image">
+					<div id="owl-demo" class="owl-carousel owl-theme">
+						<div class="item">
+							<img src="../static/download.png" alt="labeling-fordata" />
+							<h1>1</h1>
+							<div class="label">
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_1"
+										id="labeling_1"
+										value="happy"
+									/>
+									<label class="form-check-label" for="labeling_1">Happy</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_1"
+										id="labeling_1"
+										value="angry"
+									/>
+									<label class="form-check-label" for="labeling_1">Angry</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_1"
+										id="labeling_1"
+										value="disgust"
+									/>
+									<label class="form-check-label" for="labeling_1"
+										>Disgust</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_1"
+										id="labeling_1"
+										value="scared"
+									/>
+									<label class="form-check-label" for="labeling_1"
+										>Scared</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_1"
+										id="labeling_1"
+										value="sad"
+									/>
+									<label class="form-check-label" for="labeling_1">Sad</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_1"
+										id="labeling_1"
+										value="surprised"
+									/>
+									<label class="form-check-label" for="labeling_1"
+										>Surprised</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_1"
+										id="labeling_1"
+										value="neutral"
+									/>
+									<label class="form-check-label" for="labeling_1"
+										>Neutral</label
+									>
+								</div>
+							</div>
+						</div>
+
+						<div class="item">
+							<img src="../static/download.png" alt="labeling-fordata" />
+							<h1>2</h1>
+							<div class="label">
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_2"
+										id="labeling_2"
+										value="happy"
+									/>
+									<label class="form-check-label" for="labeling_2">Happy</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_2"
+										id="labeling_2"
+										value="angry"
+									/>
+									<label class="form-check-label" for="labeling_2">Angry</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_2"
+										id="labeling_2"
+										value="disgust"
+									/>
+									<label class="form-check-label" for="labeling_2"
+										>Disgust</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_2"
+										id="labeling_2"
+										value="scared"
+									/>
+									<label class="form-check-label" for="labeling_2"
+										>Scared</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_2"
+										id="labeling_2"
+										value="sad"
+									/>
+									<label class="form-check-label" for="labeling_2">Sad</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_2"
+										id="labeling_2"
+										value="surprised"
+									/>
+									<label class="form-check-label" for="labeling_2"
+										>Surprised</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_2"
+										id="labeling_2"
+										value="neutral"
+									/>
+									<label class="form-check-label" for="labeling_2"
+										>Neutral</label
+									>
+								</div>
+							</div>
+						</div>
+
+						<div class="item">
+							<img src="../static/download.png" alt="labeling-fordata" />
+							<h1>3</h1>
+							<div class="label">
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_3"
+										id="labeling_3"
+										value="happy"
+									/>
+									<label class="form-check-label" for="labeling_3">Happy</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_3"
+										id="labeling_3"
+										value="angry"
+									/>
+									<label class="form-check-label" for="labeling_3">Angry</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_3"
+										id="labeling_3"
+										value="disgust"
+									/>
+									<label class="form-check-label" for="labeling_3"
+										>Disgust</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_3"
+										id="labeling_3"
+										value="scared"
+									/>
+									<label class="form-check-label" for="labeling_3"
+										>Scared</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_3"
+										id="labeling_3"
+										value="sad"
+									/>
+									<label class="form-check-label" for="labeling_3">Sad</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_3"
+										id="labeling_3"
+										value="surprised"
+									/>
+									<label class="form-check-label" for="labeling_3"
+										>Surprised</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_3"
+										id="labeling_3"
+										value="neutral"
+									/>
+									<label class="form-check-label" for="labeling_3"
+										>Neutral</label
+									>
+								</div>
+							</div>
+						</div>
+
+						<div class="item">
+							<img src="../static/download.png" alt="labeling-fordata" />
+							<h1>4</h1>
+							<div class="label">
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_4"
+										id="labeling_4"
+										value="happy"
+									/>
+									<label class="form-check-label" for="labeling_4">Happy</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_4"
+										id="labeling_4"
+										value="angry"
+									/>
+									<label class="form-check-label" for="labeling_4">Angry</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_4"
+										id="labeling_4"
+										value="disgust"
+									/>
+									<label class="form-check-label" for="labeling_4"
+										>Disgust</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_4"
+										id="labeling_4"
+										value="scared"
+									/>
+									<label class="form-check-label" for="labeling_4"
+										>Scared</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_4"
+										id="labeling_4"
+										value="sad"
+									/>
+									<label class="form-check-label" for="labeling_4">Sad</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_4"
+										id="labeling_4"
+										value="surprised"
+									/>
+									<label class="form-check-label" for="labeling_4"
+										>Surprised</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_4"
+										id="labeling_4"
+										value="neutral"
+									/>
+									<label class="form-check-label" for="labeling_4"
+										>Neutral</label
+									>
+								</div>
+							</div>
+						</div>
+
+						<div class="item">
+							<img src="../static/download.png" alt="labeling-fordata" />
+							<h1>5</h1>
+							<div class="label">
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_5"
+										id="labeling_5"
+										value="happy"
+									/>
+									<label class="form-check-label" for="labeling_5">Happy</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_5"
+										id="labeling_5"
+										value="angry"
+									/>
+									<label class="form-check-label" for="labeling_5">Angry</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_5"
+										id="labeling_5"
+										value="disgust"
+									/>
+									<label class="form-check-label" for="labeling_5"
+										>Disgust</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_5"
+										id="labeling_5"
+										value="scared"
+									/>
+									<label class="form-check-label" for="labeling_5"
+										>Scared</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_5"
+										id="labeling_5"
+										value="sad"
+									/>
+									<label class="form-check-label" for="labeling_5">Sad</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_5"
+										id="labeling_5"
+										value="surprised"
+									/>
+									<label class="form-check-label" for="labeling_5"
+										>Surprised</label
+									>
+								</div>
+								<div class="form-check form-check-inline">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="labeling_5"
+										id="labeling_5"
+										value="neutral"
+									/>
+									<label class="form-check-label" for="labeling_5"
+										>Neutral</label
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="customNavigation">
+						<a class="btn prev">Previous</a>
+						<a class="btn save" href="#">Save</a>
+						<a class="btn next">Next</a>
+						<!-- <a class="btn play">Autoplay</a>
+						<a class="btn stop">Stop</a> -->
+					</div>
+				</div>
+			</body>
+
+			<!-- ------------------------------------------------ -->
+			<footer>
+				<div class="row">
+					<div class="col-sm">
+						<div class="default infor-app">
+							<div class="author">
+								<h2>
+									<i
+										class="fa fa-user"
+										style="margin-right: 5px"
+										aria-hidden="true"
+									></i
+									>Author
+								</h2>
+								<ul class="list-infot-author">
+									<li>
+										<i class="fa fa-facebook" aria-hidden="true"></i>
+										<a href="#">Trần Ngọc Thương</a>
+									</li>
+									<li>
+										<i class="fa fa-facebook" aria-hidden="true"></i>
+										<a href="#">Đỗ Tùng Lâm</a>
+									</li>
+									<li>
+										<i class="fa fa-facebook" aria-hidden="true"></i>
+										<a href="#">Lê Minh Phú</a>
+									</li>
+								</ul>
+							</div>
+							<div class="tech">
+								<h2>
+									<i class="fa fa-cloud" aria-hidden="true"></i>Technology
+								</h2>
+								<ul>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/js-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/python-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/js-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/python-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/js-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/python-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/js-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/python-icon.png" alt=""
+										/></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<!-- <script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script> -->
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.js"
+			integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
+		<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"
+      crossorigin="anonymous"
+    ></script>
+
+		<script src="../static/assets/dist/owl.carousel.min.js"></script>
+		<script src="../static/assets/js/labeling.js"></script>
+	</body>
+</html>
