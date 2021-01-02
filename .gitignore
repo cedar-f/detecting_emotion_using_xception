@@ -1,2 +1,3 @@
 venv/
 *.pem
+new_user_credentials.csv

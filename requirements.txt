@@ -1,6 +1,3 @@
-gunicorn
-Keras~=2.4.3
-tensorflow==2.3.1
 flask_socketio
 pandas==0.25.3
 numpy==1.17.4
@@ -10,9 +7,8 @@ matplotlib~=3.3.2
 opencv-python~=4.4.0.44
 Flask~=1.1.2
 Pillow~=8.0.1
-itsdangerous==1.1.0
-MarkupSafe==1.1.1
-Werkzeug==1.0.1
-Jinja2==2.11.2
-
 eventlet~=0.30.0
+tensorflow==2.3.1
+Keras~=2.4.3
+boto3==1.16.47
+botocore==1.19.47

@@ -13,6 +13,7 @@ EMOTIONS = ["angry", "disgust", "scared", "happy", "sad", "surprised", "neutral"
 
 
 def predictXception(frame):
+    is_save = False
     frame = imutils.resize(frame, width=300)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_detection.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30),
@@ -32,8 +33,9 @@ def predictXception(frame):
         preds = emotion_classifier.predict(roi)[0]
         emotion_probability = np.max(preds)
         label = EMOTIONS[preds.argmax()]
+        is_save = True
     else:
-        return frame
+        return frame, is_save
 
     for (i, (emotion, prob)) in enumerate(zip(EMOTIONS, preds)):
         text = "{}: {:.2f}%".format(emotion, prob * 100)
@@ -42,11 +44,11 @@ def predictXception(frame):
         # cv2.rectangle(canvas, (7, (i * 35) + 5),
         #               (w, (i * 35) + 35), (0, 0, 255), -1)
         # cv2.putText(canvas, text, (10, (i * 35) + 23),
-                    # cv2.FONT_HERSHEY_SIMPLEX, 0.45,
-                    # (255, 255, 255), 2)
+        # cv2.FONT_HERSHEY_SIMPLEX, 0.45,
+        # (255, 255, 255), 2)
         cv2.putText(frameClone, label, (fX, fY - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
         cv2.rectangle(frameClone, (fX, fY), (fX + fW, fY + fH),
                       (0, 0, 255), 2)
 
-    return frameClone
+    return frameClone, is_save

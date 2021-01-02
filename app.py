@@ -1,14 +1,15 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO, join_room, emit, send
+from flask_socketio import SocketIO, emit
 from io import StringIO
 import io
 import base64
 from PIL import Image
 import cv2
 import numpy as np
-import imutils
 from videoStreaming import predictXception
 import eventlet
+from img_2_directory import upload_img
+import time
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins='*')
@@ -30,7 +31,7 @@ def image(data_image):
 
     ## converting RGB to BGR, as opencv standards
     frame = cv2.cvtColor(np.array(pimg), cv2.COLOR_RGB2BGR)
-    frame = predictXception(frame)
+    frame, is_save = predictXception(frame)
     if frame is None:
         emit('response_back', None)
         return
@@ -41,8 +42,9 @@ def image(data_image):
     stringData = base64.b64encode(imgencode).decode('utf-8')
     b64_src = 'data:image/jpg;base64,'
     stringData = b64_src + stringData
-
-    # emit the frame back
+    if time.localtime().tm_sec % 10 ==0 and is_save is True:
+        print(is_save)
+        upload_img(pimg)
     emit('response_back', stringData)
 
 
@@ -56,6 +58,6 @@ if __name__ == '__main__':
 
     eventlet.wsgi.server(
         eventlet.wrap_ssl(eventlet.listen(("0.0.0.0", 3000)),
-                          certfile='cert.pem',
-                          keyfile='key.pem',
+                          certfile='key_and_lock/cert.pem',
+                          keyfile='key_and_lock/key.pem',
                           server_side=True), app)
