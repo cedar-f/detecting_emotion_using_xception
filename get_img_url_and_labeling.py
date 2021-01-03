@@ -18,12 +18,12 @@ def get_list_img_json():
                 'alt': 'image for labeling'})
 
     list_img_json = json.dumps(list_img.tolist())
-    return list_img_json
+    return list_img.tolist()
 
 
-# cars = {'img': ['Honda Civic', 'Toyota Corolla11', 'Ford Focus', 'Audi A4'],
-#         'label': [22000, 25000, 27000, 35000]
-#         }
+cars = {'img': ['Honda Civic', 'Toyota Corolla11', 'Ford Focus', 'Audi A4'],
+        'label': [22000, 25000, 27000, 35000]
+        }
 
 
 def save_to_csv(labeled_data):
@@ -42,4 +42,11 @@ def save_to_csv(labeled_data):
         print('df2')
         print(df2)
         df2.to_csv('s3://emtion-img-data/label/labeled_img.csv', index=False, header=True)
-print(get_list_img_json)
+
+
+def check_img_key_if_existed(url):
+    df = pd.read_csv('s3://emtion-img-data/label/labeled_img.csv')
+    return True if df.loc[df[df.columns[0]] != url] else False
+
+print(get_list_img_json())
+save_to_csv(cars)

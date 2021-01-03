@@ -69,7 +69,7 @@
           });
         }, 10000 / FPS);
 
-        socket.on("response_back", function (image) {
+        socket.on("result_predict", function (image) {
           const image_id = document.getElementById("image");
           image_id.src = image;
         });

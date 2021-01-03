@@ -47,6 +47,7 @@ def load_labeling(data):
     dataJSON = {
         "items": get_list_img_json()
     }
+    print(dataJSON)
     emit("load_labeling_client", dataJSON)
 
 
@@ -54,6 +55,11 @@ def load_labeling(data):
 def predict_by_webcamjs():
     print("SERVER STARTED")
     return render_template('index_usingWebcamJS.html')
+
+@app.route('/index-do-tung-lam')
+def predict_by_lam():
+    print("SERVER STARTED")
+    return render_template('index_lam.html')
 
 
 # @socketio.on('message')
@@ -108,8 +114,11 @@ def save_after_label(data_label):
             }
         ]
     }
+    dataJSON = {
+        "items": get_list_img_json()
+    }
     # hinh = "https://i.pinimg.com/originals/57/dc/69/57dc695c383af1aaf38798eaccceb4e5.jpg"
-    emit('testguiok', get_list_img_json())
+    emit('testguiok', dataJSON)
 
 
 @socketio.on("result_predict_for_take")

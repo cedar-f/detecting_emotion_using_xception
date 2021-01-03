@@ -3,9 +3,10 @@ $(document).ready(function () {
 	var owl = $('#owl-demo');
 	function customDataSuccess(data, owl) {
 		var name = '';
-		var item_hero = '';
 
+        var items_sp_hero='';
 		for (var i in data['items']) {
+		    var item_hero = '';
 			console.log('bac nac bnacb bac', i);
 			var img = data['items'][i].img;
 			name = img.split('/');
@@ -96,8 +97,10 @@ $(document).ready(function () {
 				'</div>' +
 				'</div>' +
 				'</div>';
+				items_sp_hero+=item_hero
+
 		}
-		$('#owl-demo').html(item_hero);
+		$('#owl-demo').html(items_sp_hero);
 		owl.owlCarousel();
 	}
 	console.log('connecting . . . .');
@@ -125,6 +128,9 @@ $(document).ready(function () {
 		// window.alert('đã nhận về dc');
 		// window.alert(dataJson);
 		console.log(dataJson)
+		owl.trigger('destroy.owl.carousel');
+		owl.find('.owl-stage-outer').children().unwrap();
+		owl.removeClass('owl-center owl-loaded owl-text-select-on');
 		customDataSuccess(dataJson, owl);
 	});
 
@@ -226,6 +232,7 @@ $(document).ready(function () {
 
 		let data_label = img_name + '-' + satus_label;
 		socket.emit('save_after_label', data_label);
+		console.log("da lbel va da gui di",data_label);
 	}
 
 	socket.on('testguiok', function (data) {
