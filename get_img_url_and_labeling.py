@@ -9,9 +9,13 @@ bucket = s3_client.Bucket('emtion-img-data')
 
 def get_list_img_json():
     list_img = np.array([])
+    count = 0
     for my_bucket_object in bucket.objects.all():
+        if count > 12:
+            break
         if re.match('^img/.+', my_bucket_object.key) and check_img_key_if_not_existed(my_bucket_object.key.replace(
                 'img/', '')):
+            count = count + 1
             # print(my_bucket_object.key.replace('img/', ''))
             # print(check_img_key_if_not_existed(my_bucket_object.key))
             # print(my_bucket_object.key)
