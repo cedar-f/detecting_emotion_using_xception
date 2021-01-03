@@ -58,8 +58,8 @@ def predict_by_webcamjs():
     return render_template('index_usingWebcamJS.html')
 
 
-@app.route('/index-do-tung-lam')
-def predict_by_lam():
+@app.route('/predict-simple')
+def predict_simple():
     print("SERVER STARTED")
     return render_template('index_lam.html')
 

@@ -55,7 +55,7 @@ $(document).ready(function () {
 			let rs = webcam.snap();
 			let data_sended = rs.replace(/^data\:image\/\w+\;base64\,/, '');
 			socket.emit('image', data_sended);
-		}, 1000 / FPS);
+		}, 10000 / FPS);
 		socket.on('result_predict', function (image) {
 			// const image_id = $('#result_predict_on2');
 			const image_id = document.getElementById('result_predict_on2');

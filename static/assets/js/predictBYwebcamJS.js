@@ -27,7 +27,7 @@ $(document).ready(function () {
 				socket.emit('image', data_sended);
 				console.log('đang gửi ...');
 			});
-		}, 1000 / FPS);
+		}, 10000 / FPS);
 		socket.on('result_predict', function (image) {
 			console.log('client nhận về', typeof image);
 			const image_id = document.getElementById('result_predict_on2');

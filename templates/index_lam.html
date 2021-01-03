@@ -2,11 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>test</title>
+    <title>Simple Predict</title>
+    <link
+			rel="shortcut icon"
+			href="/static/assets/img/icon.jpg"
+			type="image/x-icon"
+		/>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
     />
+        <link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+			integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+			crossorigin="anonymous"
+		/>
+
+		<link rel="stylesheet" href="../static/assets/css/style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"
@@ -20,16 +33,147 @@
         height: 240px;
         border: 1px solid black;
       }
+      .main{
+        display:flex;
+        flex-direction:row;
+
+      }
+      img#image{width:500px; height:380px;}
+
     </style>
   </head>
   <body>
-    <div id="original"></div>
-    <input type="button" value="Take Snapshot" onClick="take_snapshot()" />
-    <div id="results"></div>
+  	<div class="container-fluid">
+       <header>
+				<div class="row">
+					<div class="col-sm">
+						<div class="default title-app">
+							<h1>Facial Recognition APP</h1>
+							<i class="fa fa-heart" aria-hidden="true">10k</i>
+							<i class="fa fa-share" aria-hidden="true">share</i>
+						</div>
+					</div>
+				</div>
+        </header>
+        <!-- <nav class="nav justify-content-center"> -->
+          <ul class="nav nav-tabs bg-info">
+				<li class="nav-item">
+					<a href="/" class="nav-link ">Predict Using WebcamEasy</a>
+				</li>
+				<li class="nav-item">
+					<a id="load_labeling" href="/labeling" class="nav-link"
+						>Labeling Data</a
+					>
+				</li>
+				<li class="nav-item">
+					<a href="/predict-by-webcamjs" class="nav-link"
+						>Predict Using WebcamJS</a
+					>
+				</li>
+				<li class="nav-item">
+					<a href="/predict-simple" class="nav-link active"
+						>Predict Simple</a
+					>
+				</li>
+			</ul>
 
-    <div class="video">
-      <img id="image" />
+      <!-- ---------------------------- -->
+      <div class="row main">
+
+           <div id="original"></div>
+             <hr>
+            <div id="results"></div>
+      <hr>
+              <div class="video">
+                  <img id="image" />
+              </div>
+      </div>
+
+
+
+
+      <footer>
+				<div class="row">
+					<div class="col-sm">
+						<div class="default infor-app">
+							<div class="author">
+								<h2>
+									<i
+										class="fa fa-user"
+										style="margin-right: 5px"
+										aria-hidden="true"
+									></i
+									>Author
+								</h2>
+								<ul class="list-infot-author">
+									<li>
+										<i class="fa fa-facebook" aria-hidden="true"></i>
+										<a href="#">Trần Ngọc Thương</a>
+									</li>
+									<li>
+										<i class="fa fa-facebook" aria-hidden="true"></i>
+										<a href="#">Đỗ Tùng Lâm</a>
+									</li>
+									<li>
+										<i class="fa fa-facebook" aria-hidden="true"></i>
+										<a href="#">Lê Minh Phú</a>
+									</li>
+								</ul>
+							</div>
+							<div class="tech">
+								<h2>
+									<i class="fa fa-cloud" aria-hidden="true"></i>Technology
+								</h2>
+								<ul>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/js-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/python-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/js-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/python-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/js-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/python-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/js-icon.png" alt=""
+										/></a>
+									</li>
+									<li>
+										<a href="#"
+											><img src="../static/assets/img/python-icon.png" alt=""
+										/></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
     </div>
+
+
 
     <!-- camera -->
     <script type="text/javascript" src="static/webcamjs/webcam.min.js"></script>
