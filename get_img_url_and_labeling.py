@@ -42,4 +42,4 @@ def save_to_csv(labeled_data):
         print('df2')
         print(df2)
         df2.to_csv('s3://emtion-img-data/label/labeled_img.csv', index=False, header=True)
-
+print(get_list_img_json)
