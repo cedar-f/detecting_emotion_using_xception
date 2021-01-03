@@ -9,8 +9,9 @@ import numpy as np
 from videoStreaming import predictXception
 import eventlet
 from img_2_directory import upload_img
-from get_img_url_and_labeling import get_list_img_json
+from get_img_url_and_labeling import get_list_img_json, save_to_csv
 import time
+import pandas as pd
 from engineio.payload import Payload
 
 Payload.max_decode_packets = 10000
@@ -43,7 +44,7 @@ def labeling():
 @socketio.on('load_labeling')
 def load_labeling(data):
     # print('client connect status: '+msg)
-    print("đã nhận được dữ liệu là: "+data+"từ client nhé")
+    print("đã nhận được dữ liệu là: " + data + "từ client nhé")
     dataJSON = {
         "items": get_list_img_json()
     }
@@ -55,6 +56,7 @@ def load_labeling(data):
 def predict_by_webcamjs():
     print("SERVER STARTED")
     return render_template('index_usingWebcamJS.html')
+
 
 @app.route('/index-do-tung-lam')
 def predict_by_lam():
@@ -93,9 +95,11 @@ def image(data_image):
     b64_src = 'data:image/jpg;base64,'
     stringData = b64_src + stringData
     if time.localtime().tm_sec % 10 == 0 and is_save is True:
-        print(is_save)
+        # print(is_save)
         upload_img(pimg)
     emit('result_predict', stringData)
+
+
 # response_back
 # result_predict
 
@@ -104,16 +108,25 @@ def image(data_image):
 
 @socketio.on('save_after_label')
 def save_after_label(data_label):
-    print('img_after_label: ' + data_label)
-    # send(data_label, broadcast=True)
-    hinhs = {
-        "items": [
-            {
-                "img": "https://i.pinimg.com/originals/57/dc/69/57dc695c383af1aaf38798eaccceb4e5.jpg",
-                "alt": "image for labeling"
-            }
-        ]
-    }
+    # print('client', data_label)
+    # labeled_data = data_label.split('@')
+    # print(labeled_data)
+    # print("du liu nhan ve",tuple(labeled_data))
+    # print(tuple(labeled_data).shape)
+    # print(type(labeled_data))
+    # df = pd.DataFrame(labeled_data, columns=['img', 'label'])
+    # print(df)
+
+    converted_data_label = []
+    for item in data_label:
+        img = str(item).split('@')[0].replace('img/', '')
+        # print('process', img)
+        lbl = str(item).split('@')[1]
+        converted_data_label.append((img, lbl))
+
+    # print(converted_data_label)
+    save_to_csv(converted_data_label)
+    # print(get_list_img_json())
     dataJSON = {
         "items": get_list_img_json()
     }
@@ -154,7 +167,7 @@ if __name__ == '__main__':
     # socketio.run(app, host="0.0.0.0", debug=True,  keyfile="key.pem", certfile="cert.pem")
 
     # create certificate
-    # openssl req -newkey rsa: 2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
+    # openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
 
     eventlet.wsgi.server(
         eventlet.wrap_ssl(eventlet.listen(("0.0.0.0", 3000)),

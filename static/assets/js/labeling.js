@@ -12,7 +12,7 @@ $(document).ready(function () {
 			name = img.split('/');
 			name = name[name.length - 1];
 			var alt = data['items'][i].alt;
-			var stt = i + 1;
+			var stt = i;
 
 			item_hero =
 				'<div class="item">' +
@@ -190,9 +190,11 @@ $(document).ready(function () {
 		}
 		// console.log('name', name_img);
 		// console.log('status', lb_img);
+		console.log(name_img.length,lb_img.length);
 		if (name_img.length === lb_img.length) {
-			data.forEach(send);
-			console.log('có gửi được mà');
+//			data.forEach(send);
+//			console.log('có gửi được mà');
+            sendArray(data);
 		} else {
 			window.alert('bạn phải gán hết nhãn');
 		}
@@ -230,11 +232,37 @@ $(document).ready(function () {
 			}
 		}
 
-		let data_label = img_name + '-' + satus_label;
+		let data_label = img_name + '@' + satus_label;
 		socket.emit('save_after_label', data_label);
 		console.log("da lbel va da gui di",data_label);
 	}
+	function sendArray(data) {
+	    console.log(data);
+	    var array_to_lam=[];
+	    for(var item =0; item<data.length; item++){
+	        let img_name=data[item].querySelector("img").src.split('/');
+	        console.log(img_name);
+            img_name = img_name[img_name.length - 1];
+            console.log(img_name);
+            let label = $('.owl-stage>.active>.item')[item].querySelectorAll(
+                '.item>.label>.form-check>input'
+            );
+            let satus_label = '';
+            for (i = 0; i < label.length; i++) {
+                if (label[i].checked) {
+                    satus_label = label[i].value;
+                }
+            }
 
+            let data_label = img_name + '@' + satus_label;
+            array_to_lam.push(data_label);
+
+
+	    }
+	    socket.emit('save_after_label', array_to_lam);
+        console.log("da lbel va da gui di",array_to_lam);
+
+	}
 	socket.on('testguiok', function (data) {
 		owl.trigger('destroy.owl.carousel');
 		owl.find('.owl-stage-outer').children().unwrap();
